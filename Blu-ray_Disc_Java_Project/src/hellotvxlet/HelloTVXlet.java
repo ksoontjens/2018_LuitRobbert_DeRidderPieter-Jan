@@ -6,8 +6,13 @@ import javax.tv.xlet.*; // Xlet
 import java.awt.event.*; // ActionListener
 import java.awt.*;
 import java.awt.Color; // variabelen topLeft, topRight, bottomLeft, bottomRight 
-import java.awt.event.ActionEvent;
 import java.awt.Graphics;
+
+// AWT Events
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 //  
 import javax.swing.JFrame; // variabele frame
@@ -24,13 +29,13 @@ import org.dvb.event.*;
 
 // UI
 import org.havi.ui.event.*;
+import org.havi.ui.event.HActionListener;
 import org.havi.ui.HScene;
 import org.havi.ui.HSceneFactory;
 import org.havi.ui.HState;
 import org.havi.ui.HStaticText;
 import org.havi.ui.HTextButton;
 import org.havi.ui.HVisible;
-import org.havi.ui.event.HActionListener;
 
 public class HelloTVXlet implements Xlet, ActionListener {
      
@@ -51,15 +56,25 @@ public class HelloTVXlet implements Xlet, ActionListener {
 
     // 
     private Random random;
+
+    // JFrame
     private JFrame frame;
     
     public HelloTVXlet() {
+
+        // Kader waarin het spel gaat runnen
+        frame = new JFrame("SimonSays"); // Titel
+        frame.setSize(HEIGHT, WIDTH); // Hoogte & Breedte
+
         // Start het spel
         startGame = true;
+
         // Score op 0 bij start van het spel
         score = 0;
+
         // Nieuwe random bij begin van het spel
         random = new Random();
+
     }
 
     public void initXlet(XletContext context) {
