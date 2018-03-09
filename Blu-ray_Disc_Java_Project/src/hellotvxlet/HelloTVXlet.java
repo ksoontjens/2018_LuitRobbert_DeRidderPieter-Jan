@@ -29,9 +29,25 @@ import org.havi.ui.HTextButton;
 import org.havi.ui.HVisible;
 import org.havi.ui.event.HActionListener;
 
-public class HelloTVXlet implements Xlet {
+import sun.net.www.content.text.plain;
 
+public class HelloTVXlet implements Xlet {
   
+    // Core dingen
+    private boolean startGame;
+    private boolean endGame;
+    private int score;
+
+    // 
+    private Random random;
+
+
+    /** Panel colors. */
+    private Color linksBoven = Color.GREEN;
+    private Color topRightColor = Color.RED;
+    private Color bottomLeftColor = Color.YELLOW;
+    private Color bottomRightColor = Color.BLUE;
+
     public HelloTVXlet() {
         
     }
