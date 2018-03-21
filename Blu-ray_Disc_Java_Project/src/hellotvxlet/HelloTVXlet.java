@@ -1,7 +1,9 @@
 package hellotvxlet;
 
+import java.awt.event.*;
 import javax.tv.xlet.*;
 import org.dvb.ui.DVBColor;
+import org.havi.ui.event.*;
 import org.havi.ui.HScene;
 import org.havi.ui.HSceneFactory;
 import org.havi.ui.HSceneTemplate;
@@ -10,9 +12,10 @@ import org.havi.ui.HScreenPoint;
 import org.havi.ui.HStaticText;
 import org.havi.ui.HTextButton;
 import org.havi.ui.HVisible;
+import org.havi.ui.event.HActionListener;
 
 
-public class HelloTVXlet implements Xlet {
+public class HelloTVXlet implements Xlet, HActionListener {
     private HScene scene;
     public HelloTVXlet() {
         int[] colorsArray;
@@ -65,7 +68,17 @@ public class HelloTVXlet implements Xlet {
         knop3.setFocusTraversal(null, knop4, knop1, null);
         knop4.setFocusTraversal(knop3, null, knop2, null);
         
-        knop1.setActionCommand("knop1_actioned");
+        knop1.setActionCommand("knop1");
+        knop1.addHActionListener(this);
+        
+        knop2.setActionCommand("knop2");
+        knop2.addHActionListener(this);
+        
+        knop3.setActionCommand("knop3");
+        knop3.addHActionListener(this);
+        
+        knop4.setActionCommand("knop4");
+        knop4.addHActionListener(this);
         
         scene.add(knop1);
         scene.add(knop2);
@@ -83,6 +96,10 @@ public class HelloTVXlet implements Xlet {
         scene.add(tekstLabel);
     }
 
+    public void actionPerformed(ActionEvent e) {
+        System.out.println(e.getActionCommand());
+    }
+    
     public void startXlet() {
         scene.validate();
         scene.setVisible(true);
