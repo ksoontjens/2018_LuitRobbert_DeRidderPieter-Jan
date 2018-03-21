@@ -1,98 +1,91 @@
 package hellotvxlet;
 
-import javax.tv.xlet.*; // Xlet
-
-// AWT
-import java.awt.event.*; // ActionListener
-
-// variabelen topLeft, topRight, bottomLeft, bottomRight 
-import java.awt.*;// variabelen topLeft, topRight, bottomLeft, bottomRight 
-
-// AWT Events
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener; // ActionListener
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-
-// SWING
-import javax.swing.JFrame; // variabele frame
-import javax.swing.Renderer; // 
-
-// UTILS
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Random; // variabele random
-import java.util.Timer;
-
-// DVB
-import org.dvb.ui.*;
-import org.dvb.event.*;
-
-// UI
-import org.havi.ui.event.*;
-import org.havi.ui.event.HActionListener;
+import javax.tv.xlet.*;
+import org.dvb.ui.DVBColor;
 import org.havi.ui.HScene;
 import org.havi.ui.HSceneFactory;
-import org.havi.ui.HState;
+import org.havi.ui.HSceneTemplate;
+import org.havi.ui.HScreenDimension;
+import org.havi.ui.HScreenPoint;
 import org.havi.ui.HStaticText;
 import org.havi.ui.HTextButton;
 import org.havi.ui.HVisible;
 
-public class HelloTVXlet implements Xlet, ActionListener, MouseListener {
-     
-    // Hoogte & breedte waarin het spel gaat runnen
-    public static int WIDTH     = 600;        
-    public static int HEIGHT    = 600;   
 
-    // Kleuren die bij Simon Says horen
-    private Color topLeft       = Color.GREEN;
-    private Color topRight      = Color.RED;
-    private Color bottomLeft    = Color.YELLOW;
-    private Color bottomRight   = Color.BLUE;
-
-    // Essentiele dingen
-    private boolean startGame   = false;
-    private boolean endGame     = false;
-    private int score;
-
-    // Random
-    private Random random;
-
-    // JFrame
-    private JFrame frame;
-    public Renderer renderer; 
-
+public class HelloTVXlet implements Xlet {
+    private HScene scene;
     public HelloTVXlet() {
-
-        renderer = new Renderer();
-        
-        // Kader waarin het spel gaat runnen
-        frame = new JFrame("SimonSays"); // Titel
-        
-        frame.setSize(HEIGHT, WIDTH); // Hoogte & Breedte
-        frame.setResizable(false); // Vaste breedte en hoogte (kan aangepast worden)
-        frame.setLayout(new BorderLayout()); // Layout structuur
-
-        frame.addMouseListener(this); // Om te testen
-
-        pattern = new ArrayList<Integer>(); // Patroon waarin kleuren worden afgespeeld..
-
-        // Start het spel
-        startGame = true;
-
-        // Score op 0 bij start van het spel
-        score = 0;
-
-        // Nieuwe random bij begin van het spel
-        random = new Random();
+        int[] colorsArray;
     }
 
-    public void initXlet(XletContext context) {
-      
+    private HStaticText tekstLabel;
+    private HTextButton knop1, knop2, knop3, knop4;
+    
+    public void initXlet(XletContext context) throws XletStateChangeException {
+        HSceneTemplate sceneTemplate    = new HSceneTemplate();
+        
+        sceneTemplate.setPreference(HSceneTemplate.SCENE_SCREEN_DIMENSION,
+        new HScreenDimension(1.0f, 1.0f), HSceneTemplate.REQUIRED);
+        
+        sceneTemplate.setPreference(HSceneTemplate.SCENE_SCREEN_LOCATION,
+        new HScreenPoint(0.0f, 0.0f), HSceneTemplate.REQUIRED);
+        
+        scene   = HSceneFactory.getInstance().getBestScene(sceneTemplate);
+        
+        tekstLabel  = new HStaticText("Simon Says");
+        tekstLabel.setLocation(250, 200);
+        tekstLabel.setSize(400, 250);
+        
+        knop1   = new HTextButton("KNOP 1");
+        knop1.setLocation(100, 100);
+        knop1.setSize(100, 50);
+        knop1.setBackground(new DVBColor(241, 54, 54, 100));
+        knop1.setBackgroundMode(HVisible.BACKGROUND_FILL);
+        
+        knop2   = new HTextButton("KNOP 2");
+        knop2.setLocation(100, 200);
+        knop2.setSize(100, 50);
+        knop2.setBackground(new DVBColor(241, 54, 54, 100));
+        knop2.setBackgroundMode(HVisible.BACKGROUND_FILL);
+        
+        knop3   = new HTextButton("KNOP 3");
+        knop3.setLocation(250, 100);
+        knop3.setSize(100, 50);
+        knop3.setBackground(new DVBColor(241, 54, 54, 100));
+        knop3.setBackgroundMode(HVisible.BACKGROUND_FILL);
+        
+        knop4   = new HTextButton("KNOP 4");
+        knop4.setLocation(250, 200);
+        knop4.setSize(100, 50);
+        knop4.setBackground(new DVBColor(241, 54, 54, 100));
+        knop4.setBackgroundMode(HVisible.BACKGROUND_FILL);
+        
+        knop1.setFocusTraversal(null, knop2, null, knop3);
+        knop2.setFocusTraversal(knop1, null, null, knop4);
+        knop3.setFocusTraversal(null, knop4, knop1, null);
+        knop4.setFocusTraversal(knop3, null, knop2, null);
+        
+        knop1.setActionCommand("knop1_actioned");
+        
+        scene.add(knop1);
+        scene.add(knop2);
+        scene.add(knop3);
+        scene.add(knop4);
+        
+        knop1.requestFocus();
+        
+        /* Background for textlabel */
+        /*
+        tekstLabel.setBackground(new DVBColor(255, 255, 255, 0));
+        tekstLabel.setBackgroundMode(HVisible.BACKGROUND_FILL);
+        */
+        
+        scene.add(tekstLabel);
     }
 
     public void startXlet() {
-    
+        scene.validate();
+        scene.setVisible(true);
     }
 
     public void pauseXlet() {
