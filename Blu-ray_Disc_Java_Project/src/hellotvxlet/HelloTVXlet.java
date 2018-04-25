@@ -17,7 +17,7 @@ import org.havi.ui.event.HActionListener;
 
 public class HelloTVXlet implements Xlet, HActionListener {
     private HScene scene;
-    
+    // [] vierkant haakjes
     int minValue = 1;
     int maxValue = 4;
     int randomNumber;
@@ -88,16 +88,16 @@ public class HelloTVXlet implements Xlet, HActionListener {
         blauw.setFocusTraversal(null, geel, groen, null);
         geel.setFocusTraversal(blauw, null, rood, null);
         
-        groen.setActionCommand(colornames[0]);
+        groen.setActionCommand(colorNames.get(0));
         groen.addHActionListener(this);
   
-        rood.setActionCommand(colornames[1]);
+        rood.setActionCommand(colorNames.get(0));
         rood.addHActionListener(this);
         
-        blauw.setActionCommand(colornames[2]);
+        blauw.setActionCommand(colorNames.get());
         blauw.addHActionListener(this);
         
-        geel.setActionCommand(colornames[3]);
+        geel.setActionCommand(colorNames.get(3));
         geel.addHActionListener(this);
         
         scene.add(groen);
