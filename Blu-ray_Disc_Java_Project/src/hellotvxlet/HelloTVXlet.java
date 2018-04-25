@@ -29,9 +29,7 @@ public class HelloTVXlet implements Xlet, HActionListener {
             "ROOD",
             "BLAUW",
             "GEEL"
-    };
-
-    
+    };    
 
     DVBColor colorgroen     = new DVBColor(0, 255, 0, 50);
     DVBColor colorrood      = new DVBColor(255, 0, 0, 50);
