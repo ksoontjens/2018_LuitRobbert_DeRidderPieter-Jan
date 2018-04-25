@@ -24,23 +24,22 @@ public class HelloTVXlet implements Xlet, HActionListener {
 
     ArrayList list = new ArrayList();
     ArrayList colorValues = new ArrayList();
-    ArrayList colorNames = new ArrayList();
+    String[] colorNames = {
+            "GROEN",
+            "ROOD",
+            "BLAUW",
+            "GEEL"
+    };
 
     
 
-    DVBColor colorgroen     = new DVBColor(255, 0, 0, 50);
-    DVBColor colorrood      = new DVBColor(0, 255, 0, 50);
+    DVBColor colorgroen     = new DVBColor(0, 255, 0, 50);
+    DVBColor colorrood      = new DVBColor(255, 0, 0, 50);
     DVBColor colorblauw     = new DVBColor(0, 0, 255, 50);
     DVBColor colorgeel      = new DVBColor(255, 255, 0, 50);
     DVBColor colorzwart     = new DVBColor(0, 0, 0, 255);
     
     public HelloTVXlet() {
-        String[] colorNames = {
-            "GROEN",
-            "ROOD",
-            "BLAUW",
-            "GEEL"
-        };
 
     }
 
@@ -64,25 +63,25 @@ public class HelloTVXlet implements Xlet, HActionListener {
         tekstLabel.setLocation(250, 200);
         tekstLabel.setSize(400, 250);
         
-        groen = new HTextButton(colorNames.get(Integer(0)));
+        groen = new HTextButton((String) colorNames[0]);
         groen.setLocation(100, 100);
         groen.setSize(100, 50);
         groen.setBackground(colorgroen);
         groen.setBackgroundMode(HVisible.BACKGROUND_FILL);
         
-        rood = new HTextButton(colorNames.get(Integer(1)));
+        rood = new HTextButton((String) colorNames[1]);
         rood.setLocation(100, 200);
         rood.setSize(100, 50);
         rood.setBackground(colorrood);
         rood.setBackgroundMode(HVisible.BACKGROUND_FILL);
         
-        blauw = new HTextButton(colorNames.get(Integer(2)));
+        blauw = new HTextButton((String) colorNames[2]);      
         blauw.setLocation(250, 100);
         blauw.setSize(100, 50);
         blauw.setBackground(colorblauw);
         blauw.setBackgroundMode(HVisible.BACKGROUND_FILL);
         
-        geel = new HTextButton(colorNames.get(Integer(3)));
+        geel = new HTextButton((String) colorNames[3]);
         geel.setLocation(250, 200);
         geel.setSize(100, 50);
         geel.setBackground(colorgeel);
@@ -93,16 +92,16 @@ public class HelloTVXlet implements Xlet, HActionListener {
         blauw.setFocusTraversal(null, geel, groen, null);
         geel.setFocusTraversal(blauw, null, rood, null);
         
-        groen.setActionCommand(colornames[0]);
+        groen.setActionCommand((String) colorNames[0]);
         groen.addHActionListener(this);
   
-        rood.setActionCommand(colornames[1]);
+        rood.setActionCommand((String) colorNames[1]);
         rood.addHActionListener(this);
         
-        blauw.setActionCommand(colornames[2]);
+        blauw.setActionCommand((String) colorNames[2]);
         blauw.addHActionListener(this);
         
-        geel.setActionCommand(colornames[3]);
+        geel.setActionCommand((String) colorNames[3]);
         geel.addHActionListener(this);
         
         scene.add(groen);
@@ -121,23 +120,24 @@ public class HelloTVXlet implements Xlet, HActionListener {
         scene.add(tekstLabel);
     }
 
+    /*
     public RandomNumber(){
         randomNumber = minValue + (int)(Math.random() * maxValue);
         Integer number = new Integer(randomNumber);
         list.add(number);
-        System.out.println(colorNames[randomNumber-1]);
-        return colorNames[randomNumber-1];
+        System.out.println((String) colorNames.get(randomNumber - 1));
+        return (String) colorNames.get(randomNumber - 1);
     }
+     * */
 
     public void actionPerformed(ActionEvent e) {
         System.out.println(e.getActionCommand());
-        this.RandomNumber();
+        //this.RandomNumber();
     }
     
     public void startXlet() {
         scene.validate();
         scene.setVisible(true);
-        colorValues.add(this.RandomNumber());
         System.out.println(colorValues);
     }
 
