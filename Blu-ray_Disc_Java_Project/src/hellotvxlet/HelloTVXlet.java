@@ -14,15 +14,33 @@ import org.havi.ui.HTextButton;
 import org.havi.ui.HVisible;
 import org.havi.ui.event.HActionListener;
 
+import javafx.scene.effect.BlurType;
+
 
 public class HelloTVXlet implements Xlet, HActionListener {
     private HScene scene;
+    
+    int minValue = 1;
+    int maxValue = 4;
+    int randomNumber;
+
+    ArrayList list = new ArrayList();
+    ArrayList colorValues = new ArrayList();
+    String[] colorNames = {
+        "RED",
+        "BLUE",
+        "GREEN",
+        "YELLOW"
+    };
+
+    Color colorrood = new DVBColor(241, 54, 54, 100);
+
     public HelloTVXlet() {
-        int[] colorsArray;
+
     }
 
     private HStaticText tekstLabel;
-    private HTextButton knop1, knop2, knop3, knop4;
+    private HTextButton groen, rood, bo, knop4;
     
     public void initXlet(XletContext context) throws XletStateChangeException {
         HSceneTemplate sceneTemplate    = new HSceneTemplate();
@@ -33,57 +51,57 @@ public class HelloTVXlet implements Xlet, HActionListener {
         sceneTemplate.setPreference(HSceneTemplate.SCENE_SCREEN_LOCATION,
         new HScreenPoint(0.0f, 0.0f), HSceneTemplate.REQUIRED);
         
-        scene   = HSceneFactory.getInstance().getBestScene(sceneTemplate);
+        scene   = HSceneFactory.getInstance().getBestScene(sceneTemplate).setBack;
         
         tekstLabel  = new HStaticText("Simon Says");
         tekstLabel.setLocation(250, 200);
         tekstLabel.setSize(400, 250);
         
-        knop1   = new HTextButton("KNOP 1");
-        knop1.setLocation(100, 100);
-        knop1.setSize(100, 50);
-        knop1.setBackground(new DVBColor(241, 54, 54, 100));
-        knop1.setBackgroundMode(HVisible.BACKGROUND_FILL);
+        groen = new HTextButton(colorNames[0]);
+        groen.setLocation(100, 100);
+        groen.setSize(100, 50);
+        groen.setBackground(new DVBColor(241, 54, 54, 100));
+        groen.setBackgroundMode(HVisible.BACKGROUND_FILL);
         
-        knop2   = new HTextButton("KNOP 2");
-        knop2.setLocation(100, 200);
-        knop2.setSize(100, 50);
-        knop2.setBackground(new DVBColor(241, 54, 54, 100));
-        knop2.setBackgroundMode(HVisible.BACKGROUND_FILL);
+        rood = new HTextButton(colorNames[1]);
+        rood.setLocation(100, 200);
+        rood.setSize(100, 50);
+        rood.setBackground(colorrood);
+        rood.setBackgroundMode(HVisible.BACKGROUND_FILL);
         
-        knop3   = new HTextButton("KNOP 3");
-        knop3.setLocation(250, 100);
-        knop3.setSize(100, 50);
-        knop3.setBackground(new DVBColor(241, 54, 54, 100));
-        knop3.setBackgroundMode(HVisible.BACKGROUND_FILL);
+        blauw = new HTextButton(colorNames[2]);
+        blauw.setLocation(250, 100);
+        blauw.setSize(100, 50);
+        blauw.setBackground(new DVBColor(241, 54, 54, 100));
+        blauw.setBackgroundMode(HVisible.BACKGROUND_FILL);
         
-        knop4   = new HTextButton("KNOP 4");
-        knop4.setLocation(250, 200);
-        knop4.setSize(100, 50);
-        knop4.setBackground(new DVBColor(241, 54, 54, 100));
-        knop4.setBackgroundMode(HVisible.BACKGROUND_FILL);
+        geel = new HTextButton(colorNames[3]);
+        geel.setLocation(250, 200);
+        geel.setSize(100, 50);
+        geel.setBackground(new DVBColor(241, 54, 54, 100));
+        geel.setBackgroundMode(HVisible.BACKGROUND_FILL);
         
-        knop1.setFocusTraversal(null, knop2, null, knop3);
-        knop2.setFocusTraversal(knop1, null, null, knop4);
-        knop3.setFocusTraversal(null, knop4, knop1, null);
-        knop4.setFocusTraversal(knop3, null, knop2, null);
+        groen.setFocusTraversal(null, rood, null, knop3);
+        rood.setFocusTraversal(knop1, null, null, knop4);
+        blauw.setFocusTraversal(null, knop4, knop1, null);
+        geel.setFocusTraversal(knop3, null, knop2, null);
         
-        knop1.setActionCommand("groen");
-        knop1.addHActionListener(this);
+        groen.setActionCommand("groen");
+        groen.addHActionListener(this);
   
-        knop2.setActionCommand("rood");
-        knop2.addHActionListener(this);
+        rood.setActionCommand("rood");
+        rood.addHActionListener(this);
         
-        knop3.setActionCommand("blauw");
-        knop3.addHActionListener(this);
+        blauw.setActionCommand("blauw");
+        blauw.addHActionListener(this);
         
-        knop4.setActionCommand("geel");
-        knop4.addHActionListener(this);
+        geel.setActionCommand("geel");
+        geel.addHActionListener(this);
         
-        scene.add(knop1);
-        scene.add(knop2);
-        scene.add(knop3);
-        scene.add(knop4);
+        scene.add(groen);
+        scene.add(rood);
+        scene.add(blauw);
+        scene.add(geel);
         
         knop1.requestFocus();
         
