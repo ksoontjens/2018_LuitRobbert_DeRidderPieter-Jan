@@ -18,11 +18,14 @@ public class HelloTVXlet implements Xlet, HActionListener {
 
     private HScene scene;
     private HStaticText tekstLabel;
+    private HStaticText scoreLabel;
     private HTextButton groen, rood, blauw, geel;
     
     int minValue = 1;
     int maxValue = 4;
     int randomNumber;
+    int score = 0;
+    String scoreString = "0";
 
     ArrayList list = new ArrayList();
     ArrayList colorValues = new ArrayList();
@@ -61,6 +64,10 @@ public class HelloTVXlet implements Xlet, HActionListener {
         tekstLabel.setLocation(250, 200);
         tekstLabel.setSize(400, 400);
         
+        scoreLabel = new HStaticText("0");
+        scoreLabel.setLocation(400, 50);
+        scoreLabel.setSize(200, 200);
+        
         groen = new HTextButton((String) colorNames[0]);
         groen.setLocation(100, 100);
         groen.setSize(100, 100);
@@ -92,19 +99,18 @@ public class HelloTVXlet implements Xlet, HActionListener {
         
         groen.setActionCommand((String) colorNames[0]);
         groen.addHActionListener(this);
+        scene.add(groen);
   
         rood.setActionCommand((String) colorNames[1]);
         rood.addHActionListener(this);
+        scene.add(rood);
         
         blauw.setActionCommand((String) colorNames[2]);
         blauw.addHActionListener(this);
+        scene.add(blauw);
         
         geel.setActionCommand((String) colorNames[3]);
         geel.addHActionListener(this);
-        
-        scene.add(groen);
-        scene.add(rood);
-        scene.add(blauw);
         scene.add(geel);
         
         groen.requestFocus();
@@ -113,7 +119,7 @@ public class HelloTVXlet implements Xlet, HActionListener {
         tekstLabel.setBackgroundMode(HVisible.BACKGROUND_FILL);
         
         scene.add(tekstLabel);
-        scene.add(tekstLabel);
+        scene.add(scoreLabel);
     }
 
     public String RandomNumber(){
@@ -122,10 +128,20 @@ public class HelloTVXlet implements Xlet, HActionListener {
         list.add(number);
         String x = (String) colorNames[randomNumber - 1];
         colorValues.add(x);
-        System.out.println(colorValues);  
+        System.out.println("colorvalues = " + colorValues);
+        this.AddScore();
         return x;
     }
-
+    
+    public int AddScore()  {
+        score++;
+        scoreString = Integer.toString(score);
+        scene.add(scoreLabel);
+        scene.repaint();
+        System.out.println("score = " + score);
+        return score;
+    }
+            
     public void actionPerformed(ActionEvent e) {
         System.out.println(e.getActionCommand());
         this.RandomNumber();
