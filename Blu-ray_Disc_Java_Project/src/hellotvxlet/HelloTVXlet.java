@@ -17,7 +17,7 @@ import org.havi.ui.event.HActionListener;
 
 public class HelloTVXlet implements Xlet, HActionListener {
     private HScene scene;
-    // [] vierkant haakjes
+    
     int minValue = 1;
     int maxValue = 4;
     int randomNumber;
@@ -26,6 +26,8 @@ public class HelloTVXlet implements Xlet, HActionListener {
     ArrayList colorValues = new ArrayList();
     ArrayList colorNames = new ArrayList();
 
+    
+
     DVBColor colorgroen     = new DVBColor(255, 0, 0, 50);
     DVBColor colorrood      = new DVBColor(0, 255, 0, 50);
     DVBColor colorblauw     = new DVBColor(0, 0, 255, 50);
@@ -33,10 +35,13 @@ public class HelloTVXlet implements Xlet, HActionListener {
     DVBColor colorzwart     = new DVBColor(0, 0, 0, 255);
     
     public HelloTVXlet() {
-        colorNames.add("GROEN");
-        colorNames.add("ROOD");
-        colorNames.add("BLAUW");
-        colorNames.add("GEEL");
+        String[] colorNames = {
+            "GROEN",
+            "ROOD",
+            "BLAUW",
+            "GEEL"
+        };
+
     }
 
     private HStaticText tekstLabel;
@@ -59,25 +64,25 @@ public class HelloTVXlet implements Xlet, HActionListener {
         tekstLabel.setLocation(250, 200);
         tekstLabel.setSize(400, 250);
         
-        groen = new HTextButton(colorNames.get(0));
+        groen = new HTextButton(colorNames.get(Integer(0)));
         groen.setLocation(100, 100);
         groen.setSize(100, 50);
         groen.setBackground(colorgroen);
         groen.setBackgroundMode(HVisible.BACKGROUND_FILL);
         
-        rood = new HTextButton(colorNames.get(1));
+        rood = new HTextButton(colorNames.get(Integer(1)));
         rood.setLocation(100, 200);
         rood.setSize(100, 50);
         rood.setBackground(colorrood);
         rood.setBackgroundMode(HVisible.BACKGROUND_FILL);
         
-        blauw = new HTextButton(colorNames.get(2));
+        blauw = new HTextButton(colorNames.get(Integer(2)));
         blauw.setLocation(250, 100);
         blauw.setSize(100, 50);
         blauw.setBackground(colorblauw);
         blauw.setBackgroundMode(HVisible.BACKGROUND_FILL);
         
-        geel = new HTextButton(colorNames.get(3));
+        geel = new HTextButton(colorNames.get(Integer(3)));
         geel.setLocation(250, 200);
         geel.setSize(100, 50);
         geel.setBackground(colorgeel);
@@ -88,16 +93,16 @@ public class HelloTVXlet implements Xlet, HActionListener {
         blauw.setFocusTraversal(null, geel, groen, null);
         geel.setFocusTraversal(blauw, null, rood, null);
         
-        groen.setActionCommand(colorNames.get(0));
+        groen.setActionCommand(colornames[0]);
         groen.addHActionListener(this);
   
-        rood.setActionCommand(colorNames.get(0));
+        rood.setActionCommand(colornames[1]);
         rood.addHActionListener(this);
         
-        blauw.setActionCommand(colorNames.get());
+        blauw.setActionCommand(colornames[2]);
         blauw.addHActionListener(this);
         
-        geel.setActionCommand(colorNames.get(3));
+        geel.setActionCommand(colornames[3]);
         geel.addHActionListener(this);
         
         scene.add(groen);
@@ -120,8 +125,8 @@ public class HelloTVXlet implements Xlet, HActionListener {
         randomNumber = minValue + (int)(Math.random() * maxValue);
         Integer number = new Integer(randomNumber);
         list.add(number);
-        System.out.println(colorNames.get(randomNumber-1));
-        return colorNames.get(randomNumber-1);
+        System.out.println(colorNames[randomNumber-1]);
+        return colorNames[randomNumber-1];
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -132,12 +137,6 @@ public class HelloTVXlet implements Xlet, HActionListener {
     public void startXlet() {
         scene.validate();
         scene.setVisible(true);
-
-        colorNames.add("GROEN");
-        colorNames.add("ROOD");
-        colorNames.add("BLAUW");
-        colorNames.add("GEEL");
-
         colorValues.add(this.RandomNumber());
         System.out.println(colorValues);
     }
