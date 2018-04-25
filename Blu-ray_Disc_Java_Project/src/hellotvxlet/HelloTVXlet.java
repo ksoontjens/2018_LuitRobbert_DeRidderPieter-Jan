@@ -4,7 +4,6 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import javax.tv.xlet.*;
 import org.dvb.ui.DVBColor;
-import org.havi.ui.event.*;
 import org.havi.ui.HScene;
 import org.havi.ui.HSceneFactory;
 import org.havi.ui.HSceneTemplate;
@@ -118,25 +117,23 @@ public class HelloTVXlet implements Xlet, HActionListener {
         scene.add(tekstLabel);
     }
 
-    /*
-    public RandomNumber(){
+    public String RandomNumber(){
         randomNumber = minValue + (int)(Math.random() * maxValue);
         Integer number = new Integer(randomNumber);
         list.add(number);
-        System.out.println((String) colorNames.get(randomNumber - 1));
-        return (String) colorNames.get(randomNumber - 1);
+        String x = (String) colorNames[randomNumber - 1];
+        System.out.println(x);  
+        return x;
     }
-     * */
 
     public void actionPerformed(ActionEvent e) {
         System.out.println(e.getActionCommand());
-        //this.RandomNumber();
+        this.RandomNumber();
     }
     
     public void startXlet() {
         scene.validate();
         scene.setVisible(true);
-        System.out.println(colorValues);
     }
 
     public void pauseXlet() {
