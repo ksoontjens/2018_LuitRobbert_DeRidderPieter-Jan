@@ -24,6 +24,7 @@ public class HelloTVXlet implements Xlet, HActionListener {
 
     ArrayList list = new ArrayList();
     ArrayList colorValues = new ArrayList();
+
     String[] colorNames = {
         "GROEN",
         "ROOD",
@@ -134,6 +135,8 @@ public class HelloTVXlet implements Xlet, HActionListener {
     public void startXlet() {
         scene.validate();
         scene.setVisible(true);
+        colorValues.add(this.RandomNumber());
+        System.out.println(colorValues);
     }
 
     public void pauseXlet() {
