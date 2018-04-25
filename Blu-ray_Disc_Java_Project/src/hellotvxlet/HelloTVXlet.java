@@ -15,7 +15,6 @@ import org.havi.ui.HTextButton;
 import org.havi.ui.HVisible;
 import org.havi.ui.event.HActionListener;
 
-
 public class HelloTVXlet implements Xlet, HActionListener {
     private HScene scene;
     
@@ -29,7 +28,7 @@ public class HelloTVXlet implements Xlet, HActionListener {
         "GROEN",
         "ROOD",
         "BLAUW",
-        "YELLOW"
+        "GEEL"
     };
 
     DVBColor colorgroen     = new DVBColor(255, 0, 0, 50);
@@ -91,16 +90,16 @@ public class HelloTVXlet implements Xlet, HActionListener {
         blauw.setFocusTraversal(null, geel, groen, null);
         geel.setFocusTraversal(blauw, null, rood, null);
         
-        groen.setActionCommand("groen");
+        groen.setActionCommand(colornames[0]);
         groen.addHActionListener(this);
   
-        rood.setActionCommand("rood");
+        rood.setActionCommand(colornames[1]);
         rood.addHActionListener(this);
         
-        blauw.setActionCommand("blauw");
+        blauw.setActionCommand(colornames[2]);
         blauw.addHActionListener(this);
         
-        geel.setActionCommand("geel");
+        geel.setActionCommand(colornames[3]);
         geel.addHActionListener(this);
         
         scene.add(groen);
@@ -119,8 +118,17 @@ public class HelloTVXlet implements Xlet, HActionListener {
         scene.add(tekstLabel);
     }
 
+    public RandomNumber(){
+        randomNumber = minValue + (int)(Math.random() * maxValue);
+        Integer number = new Integer(randomNumber);
+        list.add(number);
+        System.out.println(colorNames[randomNumber-1]);
+        return colorNames[randomNumber-1];
+    }
+
     public void actionPerformed(ActionEvent e) {
         System.out.println(e.getActionCommand());
+        this.RandomNumber();
     }
     
     public void startXlet() {
