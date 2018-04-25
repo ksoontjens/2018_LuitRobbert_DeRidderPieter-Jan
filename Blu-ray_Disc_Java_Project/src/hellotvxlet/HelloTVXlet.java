@@ -81,10 +81,10 @@ public class HelloTVXlet implements Xlet, HActionListener {
         geel.setBackground(new DVBColor(241, 54, 54, 100));
         geel.setBackgroundMode(HVisible.BACKGROUND_FILL);
         
-        groen.setFocusTraversal(null, rood, null, knop3);
-        rood.setFocusTraversal(knop1, null, null, knop4);
-        blauw.setFocusTraversal(null, knop4, knop1, null);
-        geel.setFocusTraversal(knop3, null, knop2, null);
+        groen.setFocusTraversal(null, rood, null, blauw);
+        rood.setFocusTraversal(groen, null, null, geel);
+        blauw.setFocusTraversal(null, geel, groen, null);
+        geel.setFocusTraversal(blauw, null, rood, null);
         
         groen.setActionCommand("groen");
         groen.addHActionListener(this);
