@@ -43,6 +43,7 @@ public class HelloTVXlet implements Xlet, HActionListener {
     public HelloTVXlet() {
 
     }
+
     public void initXlet(XletContext context) throws XletStateChangeException {
         HSceneTemplate sceneTemplate    = new HSceneTemplate();
         
@@ -112,6 +113,7 @@ public class HelloTVXlet implements Xlet, HActionListener {
         tekstLabel.setBackgroundMode(HVisible.BACKGROUND_FILL);
         
         scene.add(tekstLabel);
+        scene.add(tekstLabel);
     }
 
     public String RandomNumber(){
@@ -119,13 +121,13 @@ public class HelloTVXlet implements Xlet, HActionListener {
         Integer number = new Integer(randomNumber);
         list.add(number);
         String x = (String) colorNames[randomNumber - 1];
-        System.out.println(x);  
+        colorValues.add(x);
+        System.out.println(colorValues);  
         return x;
     }
 
     public void actionPerformed(ActionEvent e) {
         System.out.println(e.getActionCommand());
-        System.out.println(e.getID());
         this.RandomNumber();
     }
     
