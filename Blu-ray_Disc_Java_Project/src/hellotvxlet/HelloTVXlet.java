@@ -29,6 +29,8 @@ public class HelloTVXlet implements Xlet, HActionListener {
 
     ArrayList list = new ArrayList();
     ArrayList colorValues = new ArrayList();
+    ArrayList colorValuesUserInput = new ArrayList();
+    
     String[] colorNames = {
             "GROEN",
             "ROOD",
@@ -114,6 +116,10 @@ public class HelloTVXlet implements Xlet, HActionListener {
         scene.add(geel);
         
         groen.requestFocus();
+        // rood.requestFocus();
+        // setTimeout("test", 1000);
+        // blauw.requestFocus();
+        // geel.requestFocus();
         
         tekstLabel.setBackground(colortxtlabel);
         tekstLabel.setBackgroundMode(HVisible.BACKGROUND_FILL);
@@ -128,28 +134,44 @@ public class HelloTVXlet implements Xlet, HActionListener {
         list.add(number);
         String x = (String) colorNames[randomNumber - 1];
         colorValues.add(x);
-        System.out.println("colorvalues = " + colorValues);
-        this.AddScore();
+        // System.out.println("RANDOM NUMBER colorvalues ARRAY = " + colorValues);
         return x;
     }
-    
+
+    public String NumberInUserArray(){
+        randomNumber = minValue + (int)(Math.random() * maxValue);
+        Integer number = new Integer(randomNumber);
+        list.add(number);
+        String x = (String) colorNames[randomNumber - 1];
+        colorValuesUserInput.add(x);
+        System.out.println("NUMBER IN USER ARRAY colorValuesInput ARRAY = " + colorValuesUserInput);
+        return x;
+    }
+
     public int AddScore()  {
         score++;
         scoreString = Integer.toString(score);
         scene.add(scoreLabel);
         scene.repaint();
-        System.out.println("score = " + score);
+        System.out.println("Score = " + score);
         return score;
     }
             
     public void actionPerformed(ActionEvent e) {
         System.out.println(e.getActionCommand());
-        this.RandomNumber();
+        // String insertedColor = e.getActionCommand();
+        // this.NumberInUserArray();
+        String colorNmbr = this.RandomNumber();
+        if(colorValues.contains(e.getActionCommand())) {
+            System.out.println("PUNT ERBIJ! = " + e.getActionCommand() );
+            this.AddScore();
+        }
     }
     
     public void startXlet() {
         scene.validate();
         scene.setVisible(true);
+        this.RandomNumber();
     }
 
     public void pauseXlet() {
