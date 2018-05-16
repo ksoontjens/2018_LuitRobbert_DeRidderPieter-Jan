@@ -154,18 +154,26 @@ public class HelloTVXlet implements Xlet, HActionListener {
         scene.add(scoreLabel);
         scene.repaint();
         System.out.println("Score = " + score);
+        
+        String currentScore = scoreLabel.getTextContent(HVisible.NORMAL_STATE);
+        currentScore    = "" + score;
+        
+        scoreLabel.setTextContent(currentScore, HVisible.NORMAL_STATE);
+        scoreLabel.repaint();
+        
         return score;
     }
             
     public void actionPerformed(ActionEvent e) {
-        System.out.println(e.getActionCommand());
-        // String insertedColor = e.getActionCommand();
+        String insertedColor = e.getActionCommand();
+        System.out.println(insertedColor);
         // this.NumberInUserArray();
         String colorNmbr = this.RandomNumber();
         if(colorValues.contains(e.getActionCommand())) {
             System.out.println("PUNT ERBIJ! = " + e.getActionCommand() );
             this.AddScore();
-        }
+        }  
+        
     }
     
     public void startXlet() {
