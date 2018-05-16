@@ -174,9 +174,6 @@ public class HelloTVXlet implements Xlet, HActionListener {
         // Logt op welke kleur er gedrukt wordt
         System.out.println(e.getActionCommand());
 
-        // this.NumberInUserArray();
-        // String colorNmbr = this.RandomNumber();
-        
         // System.out.println(colorValues.size());
         // System.out.println(colorValuesUserInput.size());
 
@@ -206,20 +203,13 @@ public class HelloTVXlet implements Xlet, HActionListener {
         scene.validate();
         scene.setVisible(true);
 
-        //Zet een random kleur bij het begin van het spel in de colorValueArray()
+        // Zet een random kleur bij het begin van het spel in de colorValueArray()
         this.RandomNumber();
         
+        // Custom timer elementen
         CustomTimerTask objCustomTimerTask  = new CustomTimerTask();
         Timer timer     = new Timer();
-        
         timer.scheduleAtFixedRate(objCustomTimerTask, 0, 1000);
-        
-        
-    }
-    
-    public int test () {
-        System.out.println("test");
-        return 1;
     }
 
     public void pauseXlet() {
