@@ -2,6 +2,7 @@ package hellotvxlet;
 
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Timer;
 import javax.tv.xlet.*;
 import org.dvb.ui.DVBColor;
 import org.havi.ui.HScene;
@@ -13,7 +14,6 @@ import org.havi.ui.HStaticText;
 import org.havi.ui.HTextButton;
 import org.havi.ui.HVisible;
 import org.havi.ui.event.HActionListener;
-import java.util.Timer;
 
 public class HelloTVXlet implements Xlet, HActionListener {
 
@@ -157,7 +157,6 @@ public class HelloTVXlet implements Xlet, HActionListener {
         score++;
         scoreString = Integer.toString(score);
         scene.add(scoreLabel);
-        //scene.repaint();
         System.out.println("Score = " + score);
         
         String currentScore = scoreLabel.getTextContent(HVisible.NORMAL_STATE);
@@ -200,6 +199,18 @@ public class HelloTVXlet implements Xlet, HActionListener {
 
         //Zet een random kleur bij het begin van het spel in de colorValueArray()
         this.RandomNumber();
+        
+        CustomTimerTask objCustomTimerTask  = new CustomTimerTask();
+        Timer timer     = new Timer();
+        
+        timer.scheduleAtFixedRate(objCustomTimerTask, 0, 1000);
+        
+        
+    }
+    
+    public int test () {
+        System.out.println("test");
+        return 1;
     }
 
     public void pauseXlet() {
