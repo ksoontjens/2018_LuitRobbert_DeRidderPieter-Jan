@@ -13,6 +13,7 @@ import org.havi.ui.HStaticText;
 import org.havi.ui.HTextButton;
 import org.havi.ui.HVisible;
 import org.havi.ui.event.HActionListener;
+import java.util.Timer;
 
 public class HelloTVXlet implements Xlet, HActionListener {
 
@@ -51,7 +52,12 @@ public class HelloTVXlet implements Xlet, HActionListener {
 
     public void initXlet(XletContext context) throws XletStateChangeException {
         HSceneTemplate sceneTemplate    = new HSceneTemplate();
+
+        // Timer timer = new Timer();
+        // // Om de halve seconde
+        // timer.scheduleAtFixedRate(null, 0, 500); 
         
+
         sceneTemplate.setPreference(HSceneTemplate.SCENE_SCREEN_DIMENSION,
         new HScreenDimension(1.0f, 1.0f), HSceneTemplate.REQUIRED);
         
@@ -116,10 +122,9 @@ public class HelloTVXlet implements Xlet, HActionListener {
         scene.add(geel);
         
         groen.requestFocus();
-        // rood.requestFocus();
-        // setTimeout("test", 1000);
-        // blauw.requestFocus();
-        // geel.requestFocus();
+        rood.requestFocus();
+        blauw.requestFocus();
+        geel.requestFocus();
         
         tekstLabel.setBackground(colortxtlabel);
         tekstLabel.setBackgroundMode(HVisible.BACKGROUND_FILL);
@@ -134,7 +139,7 @@ public class HelloTVXlet implements Xlet, HActionListener {
         list.add(number);
         String x = (String) colorNames[randomNumber - 1];
         colorValues.add(x);
-        // System.out.println("RANDOM NUMBER colorvalues ARRAY = " + colorValues);
+        System.out.println("ColorValuesArray = " + colorValues);
         return x;
     }
 
@@ -144,7 +149,7 @@ public class HelloTVXlet implements Xlet, HActionListener {
         list.add(number);
         String x = (String) colorNames[randomNumber - 1];
         colorValuesUserInput.add(x);
-        System.out.println("NUMBER IN USER ARRAY colorValuesInput ARRAY = " + colorValuesUserInput);
+        System.out.println("UserValueArray = " + colorValuesUserInput);
         return x;
     }
 
@@ -152,7 +157,7 @@ public class HelloTVXlet implements Xlet, HActionListener {
         score++;
         scoreString = Integer.toString(score);
         scene.add(scoreLabel);
-        scene.repaint();
+        //scene.repaint();
         System.out.println("Score = " + score);
         
         String currentScore = scoreLabel.getTextContent(HVisible.NORMAL_STATE);
@@ -165,20 +170,35 @@ public class HelloTVXlet implements Xlet, HActionListener {
     }
             
     public void actionPerformed(ActionEvent e) {
-        String insertedColor = e.getActionCommand();
-        System.out.println(insertedColor);
+
+        // Logt op welke kleur er gedrukt wordt
+        System.out.println(e.getActionCommand());
+
         // this.NumberInUserArray();
-        String colorNmbr = this.RandomNumber();
+        // String colorNmbr = this.RandomNumber();
+        
+        // System.out.println(colorValues.size());
+        // System.out.println(colorValuesUserInput.size());
+
+        // Checkt op de kleur die ingegeven is en of deze in zich in de array bevindt.
         if(colorValues.contains(e.getActionCommand())) {
             System.out.println("PUNT ERBIJ! = " + e.getActionCommand() );
+            System.out.println("De kleur die op de laatste plek staat in de array = " + colorValues.get(colorValues.size() -1 ));
+            // Voegt score toe bij een juist 'kleurantwoord'
             this.AddScore();
-        }  
-        
+
+            // Voeg een nieuwe kleur toe aan het einde van de vorige colorValueArray()
+            this.RandomNumber();
+        }
     }
     
     public void startXlet() {
+
+        // Check of de scene kan worden aangemaakt, daarna zet hem zichtbaar
         scene.validate();
         scene.setVisible(true);
+
+        //Zet een random kleur bij het begin van het spel in de colorValueArray()
         this.RandomNumber();
     }
 
