@@ -1,3 +1,4 @@
+
 package hellotvxlet;
 
 import java.awt.event.*;
@@ -184,11 +185,19 @@ public class HelloTVXlet implements Xlet, HActionListener {
         if(colorValues.contains(e.getActionCommand())) {
             System.out.println("PUNT ERBIJ! = " + e.getActionCommand() );
             System.out.println("De kleur die op de laatste plek staat in de array = " + colorValues.get(colorValues.size() -1 ));
+
+            int result = (int)colorValues.size() - (int)1;
+            for(int i = 0; i < result; i++ ) {
+                System.out.println(i);
+                if (colorValues.size() == colorValuesUserInput.size()) {
+                    this.RandomNumber();
+                }                
+            }
+
             // Voegt score toe bij een juist 'kleurantwoord'
             this.AddScore();
 
             // Voeg een nieuwe kleur toe aan het einde van de vorige colorValueArray()
-            this.RandomNumber();
         }
     }
     
