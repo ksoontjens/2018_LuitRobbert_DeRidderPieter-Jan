@@ -19,15 +19,16 @@ public class CustomTimerTask extends TimerTask {
     public void run() {
         currentTime = this.repaintTime();
         System.out.println(currentTime);
+        this.runCallable();
     }
     
     public int repaintTime () {
-        if ( i % 3 == 0 )
-        {
-            System.out.println(i);
-        }
-
         i++;
         return i;
     }
+
+    public void runCallable() {
+        HelloTVXlet hello = new HelloTVXlet();
+        hello.callable();
+    } 
 }
