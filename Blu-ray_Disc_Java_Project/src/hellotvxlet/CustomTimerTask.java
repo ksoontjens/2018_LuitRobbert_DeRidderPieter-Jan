@@ -13,8 +13,11 @@ import java.util.TimerTask;
  */
 public class CustomTimerTask extends TimerTask {
 
+    int i = 0;
+    
     public void run() {
-        System.out.println("Timer method");
+        i++;
+        System.out.println(i);
     }
     
     
