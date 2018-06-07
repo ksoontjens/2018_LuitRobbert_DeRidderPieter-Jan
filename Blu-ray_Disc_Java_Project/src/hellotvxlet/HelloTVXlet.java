@@ -153,6 +153,22 @@ public class HelloTVXlet implements Xlet, HActionListener {
         return x;
     }
 
+    public int ResetScore() {
+        score = 0;
+        // array moet nog terug reset worden met kleuren
+
+        scoreString = Integer.toString(score);
+        scene.add(scoreLabel);
+        
+        String currentScore = scoreLabel.getTextContent(HVisible.NORMAL_STATE);
+        currentScore    = "" + score;
+                
+        scoreLabel.setTextContent(currentScore, HVisible.NORMAL_STATE);
+        scoreLabel.repaint();
+
+        return score;
+    }
+
     public int AddScore()  {
         score++;
         scoreString = Integer.toString(score);
@@ -195,6 +211,8 @@ public class HelloTVXlet implements Xlet, HActionListener {
             // Voeg een nieuwe kleur toe aan het einde van de vorige colorValueArray()
             String newcolor = (String)this.RandomNumber();
             System.out.println("new color = " + newcolor);
+        } else {
+            this.ResetScore();
         }
     }
     
