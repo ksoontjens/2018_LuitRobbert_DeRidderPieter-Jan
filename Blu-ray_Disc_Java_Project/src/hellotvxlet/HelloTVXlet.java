@@ -58,7 +58,6 @@ public class HelloTVXlet implements Xlet, HActionListener {
         // // Om de halve seconde
         // timer.scheduleAtFixedRate(null, 0, 500); 
         
-
         sceneTemplate.setPreference(HSceneTemplate.SCENE_SCREEN_DIMENSION,
         new HScreenDimension(1.0f, 1.0f), HSceneTemplate.REQUIRED);
         
@@ -177,12 +176,13 @@ public class HelloTVXlet implements Xlet, HActionListener {
         // System.out.println(colorValues.size());
         // System.out.println(colorValuesUserInput.size());
 
-        // Checkt op de kleur die ingegeven is en of deze in zich in de array bevindt.
         if(colorValues.contains(e.getActionCommand())) {
+            int result = (int)colorValues.size() - (int)1;
+            System.out.println(result);
+
             System.out.println("PUNT ERBIJ! = " + e.getActionCommand() );
             System.out.println("De kleur die op de laatste plek staat in de array = " + colorValues.get(colorValues.size() -1 ));
 
-            int result = (int)colorValues.size() - (int)1;
             for(int i = 0; i < result; i++ ) {
                 System.out.println(i);
                 if (colorValues.size() == colorValuesUserInput.size()) {
@@ -192,8 +192,11 @@ public class HelloTVXlet implements Xlet, HActionListener {
 
             // Voegt score toe bij een juist 'kleurantwoord'
             this.AddScore();
-
+            
             // Voeg een nieuwe kleur toe aan het einde van de vorige colorValueArray()
+            String newcolor = (String)this.RandomNumber();
+            System.out.println("a = " + newcolor);
+
         }
     }
     
