@@ -171,12 +171,11 @@ public class HelloTVXlet implements Xlet, HActionListener {
     public void actionPerformed(ActionEvent e) {
 
         // Logt op welke kleur er gedrukt wordt
-        System.out.println(e.getActionCommand());
+        System.out.println("actioncommand = " + e.getActionCommand());
 
         // System.out.println(colorValues.size());
         // System.out.println(colorValuesUserInput.size());
-
-        if(colorValues.contains(e.getActionCommand())) {
+        if(colorValues.get(colorValues.size() -1 ) == e.getActionCommand()) {
             int result = (int)colorValues.size() - (int)1;
             System.out.println(result);
 
@@ -192,11 +191,10 @@ public class HelloTVXlet implements Xlet, HActionListener {
 
             // Voegt score toe bij een juist 'kleurantwoord'
             this.AddScore();
-            
+
             // Voeg een nieuwe kleur toe aan het einde van de vorige colorValueArray()
             String newcolor = (String)this.RandomNumber();
-            System.out.println("a = " + newcolor);
-
+            System.out.println("new color = " + newcolor);
         }
     }
     
