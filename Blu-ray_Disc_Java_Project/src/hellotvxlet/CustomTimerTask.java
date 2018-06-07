@@ -14,14 +14,15 @@ import java.util.TimerTask;
 public class CustomTimerTask extends TimerTask {
 
     int i = 0;
-    
+    int currentTime;
+
     public void run() {
-        i++;
-        System.out.println(i);
+        currentTime = this.repaintTime();
+        System.out.println(currentTime);
     }
     
-    
-    public void bla () {
-        
+    public int repaintTime () {
+        i++;
+        return i;
     }
 }
