@@ -4,6 +4,7 @@ package hellotvxlet;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Timer;
+import java.util.TimerTask;
 import javax.tv.xlet.*;
 import org.dvb.ui.DVBColor;
 import org.havi.ui.HScene;
@@ -215,6 +216,11 @@ public class HelloTVXlet implements Xlet, HActionListener {
             this.ResetScore();
         }
     }
+
+    public int test () 
+    {
+        return 1;
+    }
     
     public void startXlet() {
 
@@ -224,11 +230,14 @@ public class HelloTVXlet implements Xlet, HActionListener {
 
         // Zet een random kleur bij het begin van het spel in de colorValueArray()
         this.RandomNumber();
-        
+
         // Custom timer elementen
-        CustomTimerTask objCustomTimerTask  = new CustomTimerTask();
-        Timer timer     = new Timer();
-        timer.scheduleAtFixedRate(objCustomTimerTask, 0, 1000);
+        CustomTimerTask ctt = new CustomTimerTask();
+        Timer timer         = new Timer();
+        
+        timer.scheduleAtFixedRate(ctt, 0, 1000);
+        
+
     }
 
     public void pauseXlet() {
@@ -237,5 +246,11 @@ public class HelloTVXlet implements Xlet, HActionListener {
 
     public void destroyXlet(boolean unconditional) {
      
+    }
+
+    public int callable() {
+        int x = 10;
+        System.out.println(x);
+        return x;
     }
 }
