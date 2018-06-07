@@ -58,7 +58,6 @@ public class HelloTVXlet implements Xlet, HActionListener {
         // // Om de halve seconde
         // timer.scheduleAtFixedRate(null, 0, 500); 
         
-
         sceneTemplate.setPreference(HSceneTemplate.SCENE_SCREEN_DIMENSION,
         new HScreenDimension(1.0f, 1.0f), HSceneTemplate.REQUIRED);
         
@@ -154,6 +153,22 @@ public class HelloTVXlet implements Xlet, HActionListener {
         return x;
     }
 
+    public int ResetScore() {
+        score = 0;
+        // array moet nog terug reset worden met kleuren
+
+        scoreString = Integer.toString(score);
+        scene.add(scoreLabel);
+        
+        String currentScore = scoreLabel.getTextContent(HVisible.NORMAL_STATE);
+        currentScore    = "" + score;
+                
+        scoreLabel.setTextContent(currentScore, HVisible.NORMAL_STATE);
+        scoreLabel.repaint();
+
+        return score;
+    }
+
     public int AddScore()  {
         score++;
         scoreString = Integer.toString(score);
@@ -172,17 +187,17 @@ public class HelloTVXlet implements Xlet, HActionListener {
     public void actionPerformed(ActionEvent e) {
 
         // Logt op welke kleur er gedrukt wordt
-        System.out.println(e.getActionCommand());
+        System.out.println("actioncommand = " + e.getActionCommand());
 
         // System.out.println(colorValues.size());
         // System.out.println(colorValuesUserInput.size());
+        if(colorValues.get(colorValues.size() -1 ) == e.getActionCommand()) {
+            int result = (int)colorValues.size() - (int)1;
+            System.out.println(result);
 
-        // Checkt op de kleur die ingegeven is en of deze in zich in de array bevindt.
-        if(colorValues.contains(e.getActionCommand())) {
             System.out.println("PUNT ERBIJ! = " + e.getActionCommand() );
             System.out.println("De kleur die op de laatste plek staat in de array = " + colorValues.get(colorValues.size() -1 ));
 
-            int result = (int)colorValues.size() - (int)1;
             for(int i = 0; i < result; i++ ) {
                 System.out.println(i);
                 if (colorValues.size() == colorValuesUserInput.size()) {
@@ -194,6 +209,10 @@ public class HelloTVXlet implements Xlet, HActionListener {
             this.AddScore();
 
             // Voeg een nieuwe kleur toe aan het einde van de vorige colorValueArray()
+            String newcolor = (String)this.RandomNumber();
+            System.out.println("new color = " + newcolor);
+        } else {
+            this.ResetScore();
         }
     }
     
