@@ -22,6 +22,11 @@ public class CustomTimerTask extends TimerTask {
     }
     
     public int repaintTime () {
+        if ( i % 3 == 0 )
+        {
+            System.out.println(i);
+        }
+
         i++;
         return i;
     }
