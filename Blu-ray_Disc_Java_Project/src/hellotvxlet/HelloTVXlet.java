@@ -30,8 +30,10 @@ public class HelloTVXlet implements Xlet, HActionListener {
     int minValue = 1;
     int maxValue = 4;
     int randomNumber;
+    int seconds = 0;
     String scoreString = "0";
-
+    String timeString = "0";
+    
     ArrayList list = new ArrayList();
     ArrayList colorValues = new ArrayList();
     ArrayList colorValuesUserInput = new ArrayList();
@@ -236,12 +238,8 @@ public class HelloTVXlet implements Xlet, HActionListener {
             }
     }
 
-    public void callable() {
-
-        CustomTimerTask ctt = new CustomTimerTask();
-        System.out.println("current time = " + ctt);
-
-        return (int)ctt;
+    public void callable(int seconds) {
+        System.out.println("Huidige tijd: " + seconds);
     }
 
     public void startXlet() {
@@ -256,8 +254,8 @@ public class HelloTVXlet implements Xlet, HActionListener {
         // Custom timer elementen
         Timer timer         = new Timer();
         CustomTimerTask ctt = new CustomTimerTask();
-        timer.scheduleAtFixedRate(ctt, 0, 1000);
 
+        timer.scheduleAtFixedRate(ctt, 0, 1000);
     }
 
     public void pauseXlet() {

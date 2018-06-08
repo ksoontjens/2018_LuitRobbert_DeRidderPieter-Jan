@@ -30,6 +30,6 @@ public class CustomTimerTask extends TimerTask {
 
     public void runCallable() {
         HelloTVXlet hello = new HelloTVXlet();
-        hello.callable();
+        hello.callable(currentTime);
     } 
 }
