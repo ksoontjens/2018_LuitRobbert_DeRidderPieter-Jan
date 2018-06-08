@@ -23,6 +23,7 @@ public class HelloTVXlet implements Xlet, HActionListener {
     private HStaticText tekstLabel;
     private HStaticText tekstbyLabel;
     private HStaticText scoreLabel;
+    private HStaticText timeLabel;
     private HTextButton groen, rood, blauw, geel;
     
     int score = 0;
@@ -82,6 +83,10 @@ public class HelloTVXlet implements Xlet, HActionListener {
         scoreLabel = new HStaticText("0");
         scoreLabel.setLocation(400, 75);
         scoreLabel.setSize(200, 200);
+
+        timeLabel = new HStaticText("0");
+        timeLabel.setLocation(250, 50);
+        timeLabel.setSize(400, 400);
         
         groen = new HTextButton((String) colorNames[0]);
         groen.setLocation(100, 100);
@@ -141,6 +146,7 @@ public class HelloTVXlet implements Xlet, HActionListener {
         scene.add(tekstLabel);
         scene.add(tekstbyLabel);
         scene.add(scoreLabel);
+        scene.add(timeLabel);
     }
 
     // Voegt een random kleur toe aan de colorValues array
@@ -198,6 +204,8 @@ public class HelloTVXlet implements Xlet, HActionListener {
 
         // System.out.println(colorValues.size());
         // System.out.println(colorValuesUserInput.size());
+        
+        // @TEST blauw.setVisible(false);
 
             // Check of de laatste kleur van de array overeen komt met de kleur die op de gedrukte aanwezig was
             if(colorValues.get(colorValues.size() -1 ) == e.getActionCommand()) {
@@ -228,10 +236,12 @@ public class HelloTVXlet implements Xlet, HActionListener {
             }
     }
 
-    public int callable() {
-        int x = 10;
-        System.out.println(x);
-        return x;
+    public void callable() {
+
+        CustomTimerTask ctt = new CustomTimerTask();
+        System.out.println("current time = " + ctt);
+
+        return (int)ctt;
     }
 
     public void startXlet() {
@@ -244,10 +254,10 @@ public class HelloTVXlet implements Xlet, HActionListener {
         this.RandomNumber();
 
         // Custom timer elementen
-        CustomTimerTask ctt = new CustomTimerTask();
         Timer timer         = new Timer();
-        
+        CustomTimerTask ctt = new CustomTimerTask();
         timer.scheduleAtFixedRate(ctt, 0, 1000);
+
     }
 
     public void pauseXlet() {
