@@ -22,6 +22,7 @@ public class CustomTimerTask extends TimerTask {
         this.runCallable();
     }
     
+    // Gaat optellen in tijd
     public int repaintTime () {
         i++;
         return i;
