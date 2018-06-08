@@ -53,6 +53,7 @@ public class HelloTVXlet implements Xlet, HActionListener {
 
     }
 
+    // Initialisatie bij het begin van het spel
     public void initXlet(XletContext context) throws XletStateChangeException {
         HSceneTemplate sceneTemplate    = new HSceneTemplate();
 
@@ -79,7 +80,7 @@ public class HelloTVXlet implements Xlet, HActionListener {
         tekstbyLabel.setSize(400, 400);    
 
         scoreLabel = new HStaticText("0");
-        scoreLabel.setLocation(400, 50);
+        scoreLabel.setLocation(400, 75);
         scoreLabel.setSize(200, 200);
         
         groen = new HTextButton((String) colorNames[0]);
@@ -142,6 +143,7 @@ public class HelloTVXlet implements Xlet, HActionListener {
         scene.add(scoreLabel);
     }
 
+    // Voegt een random kleur toe aan de colorValues array
     public String RandomNumber(){
         randomNumber = minValue + (int)(Math.random() * maxValue);
         Integer number = new Integer(randomNumber);
@@ -157,10 +159,10 @@ public class HelloTVXlet implements Xlet, HActionListener {
         score++;
         scoreString = Integer.toString(score);
         scene.add(scoreLabel);
-        System.out.println("Score = " + score);
+        System.out.println("Score: " + score);
         
         String currentScore = scoreLabel.getTextContent(HVisible.NORMAL_STATE);
-        currentScore    = "" + score;
+        currentScore    = "Score: " + score;
         
         scoreLabel.setTextContent(currentScore, HVisible.NORMAL_STATE);
         scoreLabel.repaint();
@@ -171,7 +173,10 @@ public class HelloTVXlet implements Xlet, HActionListener {
     // Speelveld waarden terug op 0 zetten (score, kleuren array, etc)
     public int ResetScore() {
         score = 0;
+
         //@TODO array moet nog terug naar een lege array gezet worden
+        //colorValues.clear();
+        //System.out.println(colorValues);
 
         scoreString = Integer.toString(score);
         scene.add(scoreLabel);
@@ -184,7 +189,8 @@ public class HelloTVXlet implements Xlet, HActionListener {
 
         return score;
     }
-            
+    
+    // Checkt letterlijk welke actie er worden uitgevoerd
     public void actionPerformed(ActionEvent e) {
 
         // Logt op welke kleur er gedrukt wordt
@@ -193,43 +199,41 @@ public class HelloTVXlet implements Xlet, HActionListener {
         // System.out.println(colorValues.size());
         // System.out.println(colorValuesUserInput.size());
 
-        // Check of de laatste kleur van de array overeen komt met de kleur die op de gedrukte aanwezig was
-        if(colorValues.get(colorValues.size() -1 ) == e.getActionCommand()) {
-            int result = (int)colorValues.size() - (int)1;
-            System.out.println(result);
+            // Check of de laatste kleur van de array overeen komt met de kleur die op de gedrukte aanwezig was
+            if(colorValues.get(colorValues.size() -1 ) == e.getActionCommand()) {
+                int result = (int)colorValues.size() - (int)1;
+                System.out.println(result);
 
-            System.out.println("Punt erbij, er werd op de correcte kleur: " + e.getActionCommand() + " gedrukt" );
-            System.out.println("De kleur die op de laatste plek staat in de array = " + colorValues.get(colorValues.size() -1 ));
+                System.out.println("Punt erbij, er werd op de correcte kleur: " + e.getActionCommand() + " gedrukt" );
+                System.out.println("De kleur die op de laatste plek staat in de array = " + colorValues.get(colorValues.size() -1 ));
 
-            for(int i = 0; i < result; i++ ) {
-                System.out.println(i);
-                System.out.println("aaa");
-                System.out.println("aaa");
-                System.out.println("aaa");
-                System.out.println("aaa");
-                if (colorValues.size() == colorValuesUserInput.size()) {
-                    //Voeg een nieuwe kleur toe aan de kleurenarray zodat deze voor de volgende beurt kan dienen
-                    this.RandomNumber();
-                }                
+                // Deze for loop wordt voorlopig NOG NIET UITGEVOERD
+                for(int i = 0; i < result; i++ ) {
+                    System.out.println(i);
+                    if (colorValues.size() == colorValuesUserInput.size()) {
+                        //Voeg een nieuwe kleur toe aan de kleurenarray zodat deze voor de volgende beurt kan dienen
+                        this.RandomNumber();
+                    }                
+                }
+
+                // Voegt score toe bij een juist 'kleur antwoord'
+                this.AddScore();
+
+                // Voeg een nieuwe kleur toe aan het einde van de vorige colorValueArray()
+                String newcolor = (String)this.RandomNumber();
+                System.out.println("Nieuwe kleur toegevoegd aan de colorValuesArray: " + newcolor);
+            } else {
+                // Zet de score terug op 0 bij een foute ingave
+                this.ResetScore();
             }
-
-            // Voegt score toe bij een juist 'kleur antwoord'
-            this.AddScore();
-
-            // Voeg een nieuwe kleur toe aan het einde van de vorige colorValueArray()
-            String newcolor = (String)this.RandomNumber();
-            System.out.println("new color = " + newcolor);
-        } else {
-            // Zet de score terug op 0
-            this.ResetScore();
-        }
     }
 
-    public int test () 
-    {
-        return 1;
+    public int callable() {
+        int x = 10;
+        System.out.println(x);
+        return x;
     }
-    
+
     public void startXlet() {
 
         // Check of de scene kan worden aangemaakt, daarna zet hem zichtbaar
@@ -254,9 +258,4 @@ public class HelloTVXlet implements Xlet, HActionListener {
      
     }
 
-    public int callable() {
-        int x = 10;
-        System.out.println(x);
-        return x;
-    }
 }
