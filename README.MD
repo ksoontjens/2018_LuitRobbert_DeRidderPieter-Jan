@@ -1,40 +1,10 @@
-**OVERVIEW**
-===
+# SIMON SAYSµ
 
+Basis speel instructies:
 
-Start
-===
-- Startscherm
-    - Play
-    - Info
-    - Exit
+-   Let op de kleuren, deze lichten 1 voor 1 na elkaar op.
+-   Je moet de kleuren in exact dezelfde volgorde kiezen zoals ze door de computer gegenereerd werden.
+-   Bij elke reeks wordt het spel moeilijker en moeilijker, je begint bij 1 kleur, gaat naar 2 kleuren nadoen, etc etc.
+-   Have fun playing! 
 
-- Naam player? 
-
-Game
-===
-- score
-    - adhv aantal gelukte pushes
-
-- time
-    - global timer (start stop eind spel ofc)
-
-- random kleuren trigger generator
-    - onthouden welke getriggerd werden 
-    daarna zelfde terug in te drukken
-
-- input handlers
-
-- rood,geel,groen,blauw
-
-End
-===
-- Eindscherm
-    - Score
-    - Tijd
-    - Overzicht versch gehitte kleuren
-
-Contributors:
-===
-- Pieter-Jan
-- Robbert
+Simon Says by Pieter-Jan & Robbert.
