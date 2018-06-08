@@ -16,6 +16,13 @@ public class CustomTimerTask extends TimerTask {
     int i = 0;
     int currentTime;
 
+    HelloTVXlet xlet;
+    
+    // Constructor
+    public CustomTimerTask(HelloTVXlet x) {
+        xlet = x;
+    }
+
     public void run() {
         currentTime = this.repaintTime();
         System.out.println(currentTime);

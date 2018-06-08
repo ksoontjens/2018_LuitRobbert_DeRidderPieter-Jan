@@ -32,7 +32,6 @@ public class HelloTVXlet implements Xlet, HActionListener {
     int randomNumber;
     int seconds = 0;
     String scoreString = "0";
-    String timeString = "0";
     
     ArrayList list = new ArrayList();
     ArrayList colorValues = new ArrayList();
@@ -86,9 +85,9 @@ public class HelloTVXlet implements Xlet, HActionListener {
         scoreLabel.setLocation(400, 75);
         scoreLabel.setSize(200, 200);
 
-        timeLabel = new HStaticText("0");
-        timeLabel.setLocation(250, 50);
-        timeLabel.setSize(400, 400);
+        // timeLabel = new HStaticText("0");
+        // timeLabel.setLocation(250, 50);
+        // timeLabel.setSize(400, 400);
         
         groen = new HTextButton((String) colorNames[0]);
         groen.setLocation(100, 100);
@@ -148,7 +147,7 @@ public class HelloTVXlet implements Xlet, HActionListener {
         scene.add(tekstLabel);
         scene.add(tekstbyLabel);
         scene.add(scoreLabel);
-        scene.add(timeLabel);
+        // scene.add(timeLabel);
     }
 
     // Voegt een random kleur toe aan de colorValues array
@@ -165,7 +164,6 @@ public class HelloTVXlet implements Xlet, HActionListener {
     // Score toevoegen
     public int AddScore()  {
         score++;
-        scoreString = Integer.toString(score);
         scene.add(scoreLabel);
         System.out.println("Score: " + score);
         
@@ -185,8 +183,6 @@ public class HelloTVXlet implements Xlet, HActionListener {
         //@TODO array moet nog terug naar een lege array gezet worden
         //colorValues.clear();
         //System.out.println(colorValues);
-
-        scoreString = Integer.toString(score);
         scene.add(scoreLabel);
         
         String currentScore = scoreLabel.getTextContent(HVisible.NORMAL_STATE);
@@ -244,7 +240,7 @@ public class HelloTVXlet implements Xlet, HActionListener {
 
     public void startXlet() {
 
-        // Check of de scene kan worden aangemaakt, daarna zet hem zichtbaar
+        // Check of de scene kan worden aangemaakt, zet hem zichtbaar
         scene.validate();
         scene.setVisible(true);
 
@@ -253,7 +249,7 @@ public class HelloTVXlet implements Xlet, HActionListener {
 
         // Custom timer elementen
         Timer timer         = new Timer();
-        CustomTimerTask ctt = new CustomTimerTask();
+        CustomTimerTask ctt = new CustomTimerTask(this);
 
         timer.scheduleAtFixedRate(ctt, 0, 1000);
     }
