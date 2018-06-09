@@ -33,6 +33,10 @@ public class HelloTVXlet implements Xlet, HActionListener {
     int seconds = 0;
     String scoreString = "0";
     
+    int timeBetween     = 0;
+    int prevState       = 0;
+    boolean wasActive   = false;
+    
     ArrayList list = new ArrayList();
     ArrayList colorValues = new ArrayList();
     ArrayList colorValuesUserInput = new ArrayList();
@@ -264,7 +268,6 @@ public class HelloTVXlet implements Xlet, HActionListener {
 
         // Logt op welke kleur er gedrukt wordt
         System.out.println("Er wordt op kleur: " + e.getActionCommand() + " gedrukt");
-
         this.addToUserInputArray(e.getActionCommand());
         
         // Check of de lengtes van beide arrays gelijk zijn, pas dan gaan checken of de inhoudt ook hetzelfde is
@@ -290,26 +293,42 @@ public class HelloTVXlet implements Xlet, HActionListener {
 
     public void callable(int seconds) {
         System.out.println("User input = " + colorValuesUserInput);
+        timeBetween     += 1;
 
+        System.out.println( "TimeBetween " + timeBetween );
         // System.out.println("colorvalues size = " + colorValues.size());
         // System.out.println("User Input size = " + colorValuesUserInput.size());
 
         // Als de arrays overeen komen in lengte dan is alles ingevoerd dat gechecked moet worden
         if(colorValues.size() == colorValuesUserInput.size()) {
+            timeBetween     = 0;
+            wasActive       = false;
+
             //Voeg een nieuwe kleur toe aan de kleurenarray zodat deze voor de volgende beurt kan dienen
             String newcolor = this.randomColor();
             System.out.println("Nieuwe kleur toegevoegd aan de colorValuesArray: " + newcolor);
         }
         
         // Loop door de kleuren array om ze te laten oplichten 1 voor 1 , voorlopig licht enkel de laatste nieuwe op
-        if(colorValues.size() != colorValuesUserInput.size()) {
-            for(int i = 0; i < colorValues.size(); i++) {
-                System.out.println(i);
-                this.resetTileColors();
-                this.highlightTile((String)colorValues.get(i));
+        if(colorValues.size() != colorValuesUserInput.size()) 
+        {
+            for(int i = 0; i < colorValues.size(); i++) 
+            {
+                if ( timeBetween < 3 && !wasActive ) 
+                {
+                    this.highlightTile((String)colorValues.get(i));
+                }
+                else 
+                {
+                    wasActive = true;
+                    this.resetTileColors();
+                }   
+                System.out.println("i" + i);
+                
             }
         }
-        else {
+        else 
+        {
             this.resetTileColors();
         }
         System.out.println("Huidige tijd: " + seconds);
