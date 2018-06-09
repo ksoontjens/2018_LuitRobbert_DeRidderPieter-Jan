@@ -25,7 +25,6 @@ public class CustomTimerTask extends TimerTask {
 
     public void run() {
         currentTime = this.repaintTime();
-        System.out.println(currentTime);
         this.runCallable();
     }
     
@@ -36,7 +35,6 @@ public class CustomTimerTask extends TimerTask {
     }
 
     public void runCallable() {
-        HelloTVXlet hello = new HelloTVXlet();
-        hello.callable(currentTime);
+        xlet.callable(currentTime);
     } 
 }

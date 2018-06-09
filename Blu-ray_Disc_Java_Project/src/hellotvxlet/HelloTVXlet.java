@@ -163,9 +163,7 @@ public class HelloTVXlet implements Xlet, HActionListener {
         Integer number = new Integer(randomNumber);
         list.add(number);
         String x = (String) colorNames[randomNumber - 1];
-        // colorValues.add(x);
         this.AddToColorValuesArray(x);
-        this.HighlightTile(x);
         System.out.println("ColorValuesArray = " + colorValues);
         return x;
     }
@@ -206,15 +204,15 @@ public class HelloTVXlet implements Xlet, HActionListener {
 
     public void AddToUserInputArray(String value) {
         colorValuesUserInput.add(value);
-        System.out.println(colorValuesUserInput);
+        // System.out.println(colorValuesUserInput);
     }
 
     public void AddToColorValuesArray(String value) {
         colorValues.add(value);
-        System.out.println(colorValues);
+        //System.out.println(colorValues);
     }
 
-    public void HighlightTile(String color) {
+    public void highlightTile(String color) {
         int nr = 0;
         if(color == (String)colorNames[0]) {
             nr = 0;
@@ -226,7 +224,7 @@ public class HelloTVXlet implements Xlet, HActionListener {
             nr = 2;
         }
         if(color == (String)colorNames[3]) {
-            nr = 3;
+            nr = 3; 
         }
         switch(nr) {
             case 0: 
@@ -254,27 +252,16 @@ public class HelloTVXlet implements Xlet, HActionListener {
         // Logt op welke kleur er gedrukt wordt
         System.out.println("Er wordt op kleur: " + e.getActionCommand() + " gedrukt");
 
-        // System.out.println(colorValues.size());
-        // System.out.println(colorValuesUserInput.size());
+        System.out.println("colorvalues array = " + colorValues.size());
+        System.out.println("colorvalues userinput array = " + colorValuesUserInput.size());
         
         // @TEST blauw.setVisible(false);
 
             // Check of de laatste kleur van de array overeen komt met de kleur die op de gedrukte aanwezig was
             if(colorValues.get(colorValues.size() -1 ) == e.getActionCommand()) {
-                int result = (int)colorValues.size() - (int)1;
-                System.out.println(result);
 
-                System.out.println("Punt erbij, er werd op de correcte kleur: " + e.getActionCommand() + " gedrukt" );
-                System.out.println("De kleur die op de laatste plek staat in de array = " + colorValues.get(colorValues.size() -1 ));
-
-                // Deze for loop wordt voorlopig NOG NIET UITGEVOERD
-                for(int i = 0; i < result; i++ ) {
-                    System.out.println(i);
-                    if (colorValues.size() == colorValuesUserInput.size()) {
-                        //Voeg een nieuwe kleur toe aan de kleurenarray zodat deze voor de volgende beurt kan dienen
-                        this.RandomColor();
-                    }                
-                }
+                // System.out.println("Punt erbij, er werd op de correcte kleur: " + e.getActionCommand() + " gedrukt" );
+                // System.out.println("De kleur die op de laatste plek staat in de array = " + colorValues.get(colorValues.size() -1 ));
 
                 // Voegt score toe bij een juist 'kleur antwoord'
                 this.AddScore();
@@ -289,6 +276,22 @@ public class HelloTVXlet implements Xlet, HActionListener {
     }
 
     public void callable(int seconds) {
+        for(int i = 0; i < (int)colorValues.size(); i++ ) {
+            System.out.println("aaa " + colorValues.size());
+            if (colorValues.size() == colorValuesUserInput.size()) {
+                // System.out.println("cvalues size = " + colorValues.size());
+                // System.out.println("userinput size = " + colorValuesUserInput.size());
+                //Voeg een nieuwe kleur toe aan de kleurenarray zodat deze voor de volgende beurt kan dienen
+                this.RandomColor();
+            }                
+        }
+        
+        // TEST
+        if(colorValues.size() > seconds - 1) {
+            this.highlightTile((String)colorValues.get(seconds-1));
+        }
+        
+        //this.highlightTile((String)colorNames[seconds - 1]);
         System.out.println("Huidige tijd: " + seconds);
     }
 
