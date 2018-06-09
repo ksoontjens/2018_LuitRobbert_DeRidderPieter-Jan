@@ -59,6 +59,7 @@ public class HelloTVXlet implements Xlet, HActionListener {
     DVBColor colorblauwL    = new DVBColor(0, 0, 255, 150);  
     DVBColor colorgeelL     = new DVBColor(255, 255, 0, 150);
 
+    boolean activeHigh;
     boolean allowExecution  = false;
 
     public HelloTVXlet() {
@@ -162,7 +163,6 @@ public class HelloTVXlet implements Xlet, HActionListener {
 
     // Zet de kleurwaarden terug op de standaard niet opgelichte kleuren
     public void resetTileColors() {
-
         groen.setBackground(colorgroen);
         rood.setBackground(colorrood);
         blauw.setBackground(colorblauw);
@@ -239,18 +239,22 @@ public class HelloTVXlet implements Xlet, HActionListener {
         }
         switch(nr) {
             case 0: 
+                activeHigh = true;
                 groen.setBackground(colorgroenL);
                 groen.repaint();
             break;
             case 1: 
+                activeHigh = true;
                 rood.setBackground(colorroodL);
                 rood.repaint();
             break;
             case 2: 
+                activeHigh = true;
                 blauw.setBackground(colorblauwL);
                 blauw.repaint();
             break;
             case 3: 
+                activeHigh = true;
                 geel.setBackground(colorgeelL);
                 geel.repaint();
             break;
@@ -275,7 +279,7 @@ public class HelloTVXlet implements Xlet, HActionListener {
 
                 // Voeg een nieuwe kleur toe aan het einde van de vorige colorValueArray()
                 String newcolor = (String)this.randomColor();
-
+                colorValuesUserInput.clear();
             } else {
                 // Zet de score terug op 0 bij een foute ingave
                 this.resetScore();
@@ -291,6 +295,7 @@ public class HelloTVXlet implements Xlet, HActionListener {
         // System.out.println("colorvalues size = " + colorValues.size());
         // System.out.println("User Input size = " + colorValuesUserInput.size());
 
+        // Als de arrays overeen komen in lengte dan is alles ingevoerd dat gechecked moet worden
         if(colorValues.size() == colorValuesUserInput.size()) {
             if (allowExecution) {
                 //Voeg een nieuwe kleur toe aan de kleurenarray zodat deze voor de volgende beurt kan dienen
@@ -298,17 +303,19 @@ public class HelloTVXlet implements Xlet, HActionListener {
                 System.out.println("Nieuwe kleur toegevoegd aan de colorValuesArray: " + newcolor);
             }
         }
-        allowExecution = false;                
-
-        // TEST
-        if(colorValues.size() > seconds - 1) {
-            this.highlightTile((String)colorValues.get(seconds-1));
+        allowExecution = false; 
+        
+        // Loop door de kleuren array om ze te laten oplichten 1 voor 1 , voorlopig licht enkel de laatste nieuwe op
+        if(colorValues.size() != colorValuesUserInput.size()) {
+            for(int i = 0; i < colorValues.size(); i++) {
+                System.out.println(i);
+                this.resetTileColors();
+                this.highlightTile((String)colorValues.get(i));
+            }
         }
         else {
             this.resetTileColors();
         }
-        
-        //this.highlightTile((String)colorNames[seconds - 1]);
         System.out.println("Huidige tijd: " + seconds);
     }
 
