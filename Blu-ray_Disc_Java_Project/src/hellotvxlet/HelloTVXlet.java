@@ -189,7 +189,6 @@ public class HelloTVXlet implements Xlet, HActionListener {
     public int addScore()  {
         score++;
         scene.add(scoreLabel);
-        // System.out.println("Score: " + score);
         
         String currentScore = scoreLabel.getTextContent(HVisible.NORMAL_STATE);
         currentScore    = "Score: " + score;
@@ -200,13 +199,8 @@ public class HelloTVXlet implements Xlet, HActionListener {
         return score;
     }
     
-    // Speelveld waarden terug op 0 zetten (score, kleuren array, etc)
+    // Score reset
     public int resetScore() {
-        
-        //@TODO array moet nog terug naar een lege array gezet worden
-        //colorValues.clear();
-        //System.out.println(colorValues);
-        
         score = 0;
         scene.add(scoreLabel);
         
@@ -271,8 +265,7 @@ public class HelloTVXlet implements Xlet, HActionListener {
 
         this.addToUserInputArray(e.getActionCommand());
         
-        // Check of de laatste kleur van de array overeen komt met de kleur die op de gedrukte aanwezig was
-        // if(colorValues.get(colorValues.size() -1 ) == e.getActionCommand()) {
+        // Check of de lengtes van beide arrays gelijk zijn, pas dan gaan checken of de inhoudt ook hetzelfde is
         if(colorValues.size() == colorValuesUserInput.size()) {
             if (colorValues.equals(colorValuesUserInput)) {
 
@@ -294,23 +287,19 @@ public class HelloTVXlet implements Xlet, HActionListener {
 
     public void callable(int seconds) {
         System.out.println("User input = " + colorValuesUserInput);
-        for(int i = 0; i < (int)colorValues.size(); i++ ) {
-            // System.out.println("colorvalues size = " + colorValues.size());
-            // System.out.println("User Input size = " + colorValuesUserInput.size());
-            if (allowExecution) {
-                if (colorValues.size() == colorValuesUserInput.size()) {
-                    System.out.println(colorValuesUserInputString);
-                    // System.out.println("cvalues size = " + colorValues.size());
-                    // System.out.println("userinput size = " + colorValuesUserInput.size());
-                    //Voeg een nieuwe kleur toe aan de kleurenarray zodat deze voor de volgende beurt kan dienen
-                    String newcolor = this.randomColor();
-                    System.out.println("Nieuwe kleur toegevoegd aan de colorValuesArray: " + newcolor);
-                }
-            }
-            allowExecution = false;                
-        }
 
-        
+        // System.out.println("colorvalues size = " + colorValues.size());
+        // System.out.println("User Input size = " + colorValuesUserInput.size());
+
+        if(colorValues.size() == colorValuesUserInput.size()) {
+            if (allowExecution) {
+                //Voeg een nieuwe kleur toe aan de kleurenarray zodat deze voor de volgende beurt kan dienen
+                String newcolor = this.randomColor();
+                System.out.println("Nieuwe kleur toegevoegd aan de colorValuesArray: " + newcolor);
+            }
+        }
+        allowExecution = false;                
+
         // TEST
         if(colorValues.size() > seconds - 1) {
             this.highlightTile((String)colorValues.get(seconds-1));
