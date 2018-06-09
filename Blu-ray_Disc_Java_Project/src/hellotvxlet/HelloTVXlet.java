@@ -44,13 +44,20 @@ public class HelloTVXlet implements Xlet, HActionListener {
         "GEEL"
     };    
 
+    DVBColor colorzwart     = new DVBColor(0, 0, 0, 255);
+    DVBColor colortxtlabel  = new DVBColor(0, 0, 0, 120);
+
+    //Donkere kleuren
     DVBColor colorgroen     = new DVBColor(0, 255, 0, 50);
     DVBColor colorrood      = new DVBColor(255, 0, 0, 50);
     DVBColor colorblauw     = new DVBColor(0, 0, 255, 50);
     DVBColor colorgeel      = new DVBColor(255, 255, 0, 50);
-    DVBColor colorzwart     = new DVBColor(0, 0, 0, 255);
-    DVBColor colortxtlabel  = new DVBColor(0, 0, 0, 120);
-    
+    //Lichte kleuren
+    DVBColor colorgroenL    = new DVBColor(0, 255, 0, 150);
+    DVBColor colorroodL     = new DVBColor(255, 0, 0, 150);
+    DVBColor colorblauwL    = new DVBColor(0, 0, 255, 150);  
+    DVBColor colorgeelL     = new DVBColor(255, 255, 0, 150);
+
     public HelloTVXlet() {
 
     }
@@ -158,6 +165,7 @@ public class HelloTVXlet implements Xlet, HActionListener {
         String x = (String) colorNames[randomNumber - 1];
         // colorValues.add(x);
         this.AddToColorValuesArray(x);
+        this.HighlightTile(x);
         System.out.println("ColorValuesArray = " + colorValues);
         return x;
     }
@@ -204,6 +212,40 @@ public class HelloTVXlet implements Xlet, HActionListener {
     public void AddToColorValuesArray(String value) {
         colorValues.add(value);
         System.out.println(colorValues);
+    }
+
+    public void HighlightTile(String color) {
+        int nr = 0;
+        if(color == (String)colorNames[0]) {
+            nr = 0;
+        }
+        if(color == (String)colorNames[1]) {
+            nr = 1;
+        }
+        if(color == (String)colorNames[2]) {
+            nr = 2;
+        }
+        if(color == (String)colorNames[3]) {
+            nr = 3;
+        }
+        switch(nr) {
+            case 0: 
+                groen.setBackground(colorgroenL);
+                groen.repaint();
+            break;
+            case 1: 
+                rood.setBackground(colorroodL);
+                rood.repaint();
+            break;
+            case 2: 
+                blauw.setBackground(colorblauwL);
+                blauw.repaint();
+            break;
+            case 3: 
+                geel.setBackground(colorgeelL);
+                geel.repaint();
+            break;
+        } 
     }
     
     // Checkt letterlijk welke actie er worden uitgevoerd
