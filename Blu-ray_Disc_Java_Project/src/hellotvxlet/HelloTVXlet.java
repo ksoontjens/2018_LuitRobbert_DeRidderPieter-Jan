@@ -274,6 +274,9 @@ public class HelloTVXlet implements Xlet, HActionListener {
         if(colorValues.size() == colorValuesUserInput.size()) {
             if (colorValues.equals(colorValuesUserInput)) {
 
+                timeBetween     = 0;
+                wasActive       = false;
+                
                 // Voegt score toe bij een juist 'kleur antwoord'
                 this.addScore();
 
@@ -293,15 +296,12 @@ public class HelloTVXlet implements Xlet, HActionListener {
 
     public void callable(int seconds) {
         System.out.println("User input = " + colorValuesUserInput);
-        timeBetween     += 1;
 
-        System.out.println( "TimeBetween " + timeBetween );
         // System.out.println("colorvalues size = " + colorValues.size());
         // System.out.println("User Input size = " + colorValuesUserInput.size());
 
         // Als de arrays overeen komen in lengte dan is alles ingevoerd dat gechecked moet worden
         if(colorValues.size() == colorValuesUserInput.size()) {
-            timeBetween     = 0;
             wasActive       = false;
 
             //Voeg een nieuwe kleur toe aan de kleurenarray zodat deze voor de volgende beurt kan dienen
@@ -312,19 +312,36 @@ public class HelloTVXlet implements Xlet, HActionListener {
         // Loop door de kleuren array om ze te laten oplichten 1 voor 1 , voorlopig licht enkel de laatste nieuwe op
         if(colorValues.size() != colorValuesUserInput.size()) 
         {
-            for(int i = 0; i < colorValues.size(); i++) 
-            {
-                if ( timeBetween < 3 && !wasActive ) 
+            if ( !wasActive ) 
+            {            
+                for(int i = 0; i < colorValues.size(); i++) 
                 {
+                    try 
+                    {
+                        Thread.sleep(1000);
+                    }
+                    catch (InterruptedException ex) 
+                    {
+                        System.out.println(ex);
+                    }
+
                     this.highlightTile((String)colorValues.get(i));
+
+                    try 
+                    {
+                        Thread.sleep(2000);
+                    }
+                    catch (InterruptedException ex) 
+                    {
+                        System.out.println(ex);
+                    }
+
+                    this.resetTileColors(); 
+                    wasActive   = true;
+
+
+                    System.out.println("i" + i);
                 }
-                else 
-                {
-                    wasActive = true;
-                    this.resetTileColors();
-                }   
-                System.out.println("i" + i);
-                
             }
         }
         else 
