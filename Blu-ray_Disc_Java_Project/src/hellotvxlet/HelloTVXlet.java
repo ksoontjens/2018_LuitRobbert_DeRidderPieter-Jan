@@ -299,35 +299,26 @@ public class HelloTVXlet implements Xlet, HActionListener {
     public void callable(int seconds) {
         System.out.println("User input = " + colorValuesUserInput);
 
-        if ( score <= 5 ) 
-        {
+        // Versnel het spel naar mate de score hoger wordt
+        if ( score <= 5 ) {
             timeLighted     = 2000;
         }
-        else if ( score > 5 && score <= 10 )
-        {
+        else if ( score > 5 && score <= 10 ) {
             timeLighted     = 1500;
         }
-        else if ( score > 10 && score <= 20 )
-        {
+        else if ( score > 10 && score <= 20 ) {
             timeLighted     = 1000;
         }
-        else if ( score > 20 && score <= 30 )
-        {
+        else if ( score > 20 && score <= 30 ) {
             timeLighted     = 750;
         }
-        else if ( score > 20 && score <= 30 )
-        {
+        else if ( score > 20 && score <= 30 ) {
             timeLighted     = 500;
         }
-        else 
-        {
+        else {
             timeLighted     = 300;
         }
             
-        
-        // System.out.println("colorvalues size = " + colorValues.size());
-        // System.out.println("User Input size = " + colorValuesUserInput.size());
-
         // Als de arrays overeen komen in lengte dan is alles ingevoerd dat gechecked moet worden
         if(colorValues.size() == colorValuesUserInput.size()) 
         {
@@ -339,19 +330,13 @@ public class HelloTVXlet implements Xlet, HActionListener {
         }
         
         // Loop door de kleuren array om ze te laten oplichten 1 voor 1 , voorlopig licht enkel de laatste nieuwe op
-        if(colorValues.size() != colorValuesUserInput.size()) 
-        {
-            if ( !wasActive ) 
-            {            
-                for(int i = 0; i < colorValues.size(); i++) 
-                {
+        if(colorValues.size() != colorValuesUserInput.size()) {
+            if ( !wasActive ) {            
+                for(int i = 0; i < colorValues.size(); i++) {
                     // Wacht 1 seconde
-                    try 
-                    {
+                    try {
                         Thread.sleep( 1000 );
-                    }
-                    catch ( InterruptedException ex ) 
-                    {
+                    } catch ( InterruptedException ex ) {
                         System.out.println( ex );
                     }
 
@@ -359,12 +344,9 @@ public class HelloTVXlet implements Xlet, HActionListener {
                     this.highlightTile((String)colorValues.get(i));
 
                     // Wacht 1.5 seconden
-                    try 
-                    {
+                    try {
                         Thread.sleep( timeLighted );
-                    }
-                    catch ( InterruptedException ex ) 
-                    {
+                    } catch ( InterruptedException ex ) {
                         System.out.println( ex );
                     }
 
@@ -373,9 +355,7 @@ public class HelloTVXlet implements Xlet, HActionListener {
                     wasActive   = true;
                 }
             }
-        }
-        else 
-        {
+        } else {
             this.resetTileColors();
         }
     }
